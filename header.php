@@ -27,6 +27,12 @@
               <li><a href="<?php echo site_url('/about-us'); ?>">Campuses</a></li>
               <li><a href="<?php echo site_url('/about-us'); ?>">Blog</a></li>
             </ul>
+
+            <?php
+              // wp_nav_menu(array(
+              //   'theme_location' => 'headerMenuLocation' 
+              // ));
+            ?>
           </nav>
           <div class="site-header__util">
             <a href="#" class="btn btn--small btn--orange float-left push-right">Login</a>

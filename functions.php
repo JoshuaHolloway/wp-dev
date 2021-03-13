@@ -33,6 +33,12 @@
   add_action('wp_enqueue_scripts', 'callback_f1');
 
   function callback_f2() {
+
+    // used in header.php and footer.php
+    // register_nav_menu('headerMenuLocation', 'Header Menu Location');
+    // register_nav_menu('footerLocationOne', 'Footer Location One');
+    // register_nav_menu('menu2', 'Menu 2');
+
     // set title
     add_theme_support('title-tag');
   }
