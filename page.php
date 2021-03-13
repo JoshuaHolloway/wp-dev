@@ -21,6 +21,7 @@
     <div class="container container--narrow page-section">
 
       <?php
+        // ID of parent page, or zero if is a parent.
         $theParent = wp_get_post_parent_id(get_the_ID());
         if ( $theParent != 0) {
           // echo "I am a child page";
@@ -43,14 +44,64 @@
         }
       ?>
 
+      <?php
+        // wp_list_pages() handles outputting the pages onto the screen.
+        // get_pages() just returns the pages in memory.
+
+        // -If current page has children, return all children pages
+        // -If current page has no childre, return NULL
+        $testArray = get_pages(array(
+          'child_of' => get_the_ID(),
+        ));
+
+        if ($theParent or $testArray) {
+          ?>
+
+
+            <div class="page-links">
+              <h2 class="page-links__title">
+                <a href="<?php echo get_permalink($theParent); ?>">
+                  <?php echo get_the_title($theParent); ?>  
+                </a>
+              </h2>
+              <ul class="min-list">
+                <!-- <li class="current_page_item"><a href="#">Our History</a></li> -->
+                <!-- <li><a href="#">Our Goals</a></li> -->
+                <?php
+                  // associative array arg
+                  $x = array('Cat', 'Pig', 'Dog');
+                  $y = [
+                    'one' => 1,
+                    'two' => 2
+                  ];
+                  $z = array(
+                    'one' => 1,
+                    'two' => 2
+                  );
+                  // echo $z['one'];
+
+                  if ($theParent) {
+                    $findChildrenOf = $theParent;
+                  } else {
+                    $findChildrenOf = get_the_ID();
+                  }
+
+                  wp_list_pages(array(
+                    'title_li' => NULL,
+                    'child_of' => $findChildrenOf,
+                    'sort_column' => 'menu_order'
+                  ));
+
+                ?>
+              </ul>
+            </div>
+
+
+          <?php
+        }
+      ?>
+
       
-      <!-- <div class="page-links">
-        <h2 class="page-links__title"><a href="#">About Us</a></h2>
-        <ul class="min-list">
-          <li class="current_page_item"><a href="#">Our History</a></li>
-          <li><a href="#">Our Goals</a></li>
-        </ul>
-      </div> -->
 
       <div class="generic-content">
         <?php the_content(); ?>
